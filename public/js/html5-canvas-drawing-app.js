@@ -280,7 +280,7 @@ var drawingApp = (function () {
 			context.globalAlpha = 1; // No IE support
 
 			// Draw the outline image
-			context.drawImage(outlineImage, drawingAreaX, drawingAreaY, drawingAreaWidth, drawingAreaHeight);
+			//context.drawImage(outlineImage, drawingAreaX, drawingAreaY, drawingAreaWidth, drawingAreaHeight);
 		},
 
 		// Adds a point to the drawing array.
