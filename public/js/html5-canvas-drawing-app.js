@@ -19,6 +19,13 @@ var drawingApp = (function () {
 
 	"use strict";
 
+	var socket = io();
+	var socketStartIndex = 0;
+
+	socket.on('polyline', function(lineObj) {
+		console.log(lineObj);
+	});
+
 	var canvas,
 		context,
 		canvasWidth = 490,
@@ -347,6 +354,7 @@ mouseY = (e.changedTouches ? e.changedTouches[0].pageY : e.pageY) - this.offsetT
 				}
 				paint = true;
 				addClick(mouseX, mouseY, false);
+				socketStartIndex = clickDrag.length - 1;
 				redraw();
 			},
 
@@ -365,6 +373,9 @@ mouseY = (e.changedTouches ? e.changedTouches[0].pageY : e.pageY) - this.offsetT
 
 			release = function () {
 				paint = false;
+				socket.emit('polyline', {
+					clickDrag: clickDrag
+				});
 				redraw();
 			},
 
