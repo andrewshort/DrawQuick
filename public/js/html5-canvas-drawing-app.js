@@ -381,12 +381,12 @@ mouseY = (e.changedTouches ? e.changedTouches[0].pageY : e.pageY) - this.offsetT
 			release = function () {
 				paint = false;
 				socket.emit('polyline', {
-					clickDrag: clickDrag,
-					clickX: clickX,
-					clickY: clickY,
-					clickTool: clickTool,
-					clickColor: clickColor,
-					clickSize: clickSize
+					clickDrag: clickDrag.slice(socketStartIndex),
+					clickX: clickX.slice(socketStartIndex),
+					clickY: clickY.slice(socketStartIndex),
+					clickTool: clickTool.slice(socketStartIndex),
+					clickColor: clickColor.slice(socketStartIndex),
+					clickSize: clickSize.slice(socketStartIndex)
 				});
 				redraw();
 			},

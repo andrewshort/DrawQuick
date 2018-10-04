@@ -13,7 +13,7 @@ io.on('connection', function(socket){
 
     socket.on('polyline', function(lineObj) {
         console.log('polyline received');
-        io.emit('polyline', lineObj);
+        socket.broadcast.emit('polyline', lineObj);
     });
 
     socket.on('disconnect', function(){
