@@ -23,7 +23,14 @@ var drawingApp = (function () {
 	var socketStartIndex = 0;
 
 	socket.on('polyline', function(lineObj) {
-		console.log(lineObj);
+		clickX = clickX.concat(lineObj.clickX);
+		clickY = clickY.concat(lineObj.clickY);
+		clickTool = clickTool.concat(lineObj.clickTool);
+		clickColor = clickColor.concat(lineObj.clickColor);
+		clickSize = clickSize.concat(lineObj.clickSize);
+		clickDrag = clickDrag.concat(lineObj.clickDrag);
+
+		redraw();
 	});
 
 	var canvas,
@@ -374,7 +381,12 @@ mouseY = (e.changedTouches ? e.changedTouches[0].pageY : e.pageY) - this.offsetT
 			release = function () {
 				paint = false;
 				socket.emit('polyline', {
-					clickDrag: clickDrag
+					clickDrag: clickDrag,
+					clickX: clickX,
+					clickY: clickY,
+					clickTool: clickTool,
+					clickColor: clickColor,
+					clickSize: clickSize
 				});
 				redraw();
 			},
